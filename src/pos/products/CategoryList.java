@@ -14,7 +14,7 @@ import pos.MainWindow;
 
 /**
  *
- * @author ralph
+ * @author sander
  */
 public class CategoryList extends javax.swing.JPanel {
 
@@ -22,6 +22,7 @@ public class CategoryList extends javax.swing.JPanel {
 
     /**
      * Creates new form CategoryList
+     * @param mainWindow
      */
     public CategoryList(MainWindow mainWindow) {
         this.mainWindow = mainWindow;
