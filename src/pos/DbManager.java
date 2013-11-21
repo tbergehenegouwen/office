@@ -7,13 +7,14 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 public class DbManager {
+
     public Connection connection;
 
     public void openConnection() {
         try {
             Class.forName("com.mysql.jdbc.Driver");
             String url = "jdbc:mysql://localhost/pos";
-            String user = "root", pass = "";
+            String user = "root", pass = "root";
 
             connection = DriverManager.getConnection(url, user, pass);
         } catch (ClassNotFoundException | SQLException e) {
@@ -29,6 +30,18 @@ public class DbManager {
         }
     }
 
+    public boolean removeQuery(String query) {
+        boolean result = false;
+        try {
+            Statement statement = connection.prepareStatement(query);
+            statement.execute(query);
+            result = true;
+        } catch (SQLException e) {
+            System.err.println(e);
+        }
+        return result;
+    }
+
     public ResultSet doQuery(String query) {
         ResultSet result = null;
         try {
@@ -39,7 +52,7 @@ public class DbManager {
         }
         return result;
     }
-    
+
     public ResultSet insertQuery(String query) {
         ResultSet result = null;
         try {

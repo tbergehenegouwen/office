@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package pos.products;
 
 import java.awt.Image;
@@ -20,13 +19,15 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import pos.DbManager;
 
 /**
  *
- * @author ralph
+ * @author sander
  */
 public class Product {
+
     private int id;
     private String name;
     private String description;
@@ -74,6 +75,10 @@ public class Product {
     public void setImage(Image image) {
         this.image = image;
     }
+    
+    public ImageIcon getImageIcon(){
+        return new ImageIcon(this.image.getScaledInstance(-1, 100, 0));
+    }
 
     public int getStock() {
         return stock;
@@ -112,7 +117,7 @@ public class Product {
         }
         return true;
     }
-    
+
     public static List<Product> findByCategory(Category category, DbManager dbManager) {
         List<Product> products = new ArrayList<>();
         try {
@@ -134,7 +139,7 @@ public class Product {
         }
         return products;
     }
-    
+
     public static List<Product> findAll(DbManager dbManager) {
         List<Product> products = new ArrayList<>();
         try {
@@ -157,11 +162,49 @@ public class Product {
         return products;
     }
 
+    public static Product find(DbManager dbManager, Object id) {
+        Product product = null;
+        try {
+            String sql = "SELECT * FROM Product WHERE id = '" + id + "' LIMIT 1";
+            ResultSet result = dbManager.doQuery(sql);
+            while (result.next()) {
+                product = new Product();
+                product.setId(result.getInt("Id"));
+                product.setName(result.getString("Name"));
+                product.setCategory(Category.findById(result.getInt("Category_Id"), dbManager));
+                product.setDescription(result.getString("Description"));
+                product.setPrice(result.getInt("Price"));
+                product.setStock(result.getInt("Stock"));
+                product.setImage(ImageIO.read(result.getBinaryStream("Image")));
+            }
+        } catch (SQLException | IOException e) {
+            System.out.println(e.getMessage());
+        }
+        return product;
+    }
+
+    public static boolean remove(DbManager dbManager, Object id) {
+        Product product = null;
+        boolean result = false;
+        try {
+            String sql = "DELETE FROM Product WHERE id = '" + id + "'";
+            result = dbManager.removeQuery(sql);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        if (result) {
+            System.out.println("Remove gelukt!");
+        } else {
+            System.err.println("Remove niet gelukt.");
+        }
+        return result;
+    }
+
     public static void save(Product product, DbManager dbManager) {
         try {
             PreparedStatement stmt = dbManager.connection.prepareStatement("INSERT INTO Product"
-			+ "(Name, Description, Price, Image, Stock, Category_Id, Supplier_Id) VALUES"
-			+ "(?,?,?,?,?,?,?)");
+                    + "(Name, Description, Price, Image, Stock, Category_Id, Supplier_Id) VALUES"
+                    + "(?,?,?,?,?,?,?)");
             stmt.setString(1, product.getName());
             stmt.setString(2, product.getDescription());
             stmt.setInt(3, product.getPrice());

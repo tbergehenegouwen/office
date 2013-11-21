@@ -3,25 +3,20 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package pos.admin;
 
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import java.util.List;
-import javax.swing.Box;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableModel;
+import pos.ImageRenderer;
 import pos.MainWindow;
 import pos.products.Product;
-import pos.products.ProductDetails;
-import pos.products.ProductItem;
 
 /**
  *
- * @author ralph
+ * @author sander
  */
 public class ProductList extends javax.swing.JPanel {
+
     private final MainWindow mainWindow;
 
     /**
@@ -32,17 +27,21 @@ public class ProductList extends javax.swing.JPanel {
         initComponents();
         addProducts();
     }
-    
+
     private void addProducts() {
         List<Product> products = Product.findAll(mainWindow.getDbManager());
         DefaultTableModel model = (DefaultTableModel) productTable.getModel();
         for (Product product : products) {
             model.addRow(new Object[]{product.getId(), product.getName(), product.getDescription(),
                 java.text.NumberFormat.getCurrencyInstance(java.util.Locale.GERMANY).format(product.getPrice() / 100.0),
-                product.getStock(), product.getCategory().getName()});
+                product.getStock(), product.getCategory().getName(), product.getImageIcon()});
         }
     }
-
+    
+    public ImageRenderer getImageRenderer(){
+        return new ImageRenderer();
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -54,24 +53,26 @@ public class ProductList extends javax.swing.JPanel {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         productTable = new javax.swing.JTable();
-        addCategoryBtn = new javax.swing.JButton();
+        categoriesBtn = new javax.swing.JButton();
         removeProductBtn = new javax.swing.JButton();
         editProductBtn = new javax.swing.JButton();
         addProductBtn = new javax.swing.JButton();
+        suppliersButton = new javax.swing.JButton();
+        backButton = new javax.swing.JButton();
 
         productTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Id", "Name", "Description", "Price", "Stock", "Category"
+                "Id", "Name", "Description", "Price", "Stock", "Category", "Image"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.String.class
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.String.class, java.lang.Object.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false
+                false, false, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -83,17 +84,49 @@ public class ProductList extends javax.swing.JPanel {
             }
         });
         jScrollPane1.setViewportView(productTable);
+        if (productTable.getColumnModel().getColumnCount() > 0) {
+            productTable.getColumnModel().getColumn(6).setCellRenderer(getImageRenderer());
+        }
 
-        addCategoryBtn.setText("Add Category ...");
+        categoriesBtn.setText("Categories");
+        categoriesBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                categoriesBtnActionPerformed(evt);
+            }
+        });
 
         removeProductBtn.setText("Remove Product ...");
+        removeProductBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                removeProductBtnActionPerformed(evt);
+            }
+        });
 
         editProductBtn.setText("Edit Product ...");
+        editProductBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editProductBtnActionPerformed(evt);
+            }
+        });
 
         addProductBtn.setText("Add Product ...");
         addProductBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 addProductBtnActionPerformed(evt);
+            }
+        });
+
+        suppliersButton.setText("Suppliers");
+        suppliersButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                suppliersButtonActionPerformed(evt);
+            }
+        });
+
+        backButton.setText("Back");
+        backButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                backButtonActionPerformed(evt);
             }
         });
 
@@ -103,30 +136,34 @@ public class ProductList extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jScrollPane1)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 92, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(backButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
                         .addComponent(addProductBtn)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(editProductBtn)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(removeProductBtn)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(addCategoryBtn)))
-                .addContainerGap())
+                        .addComponent(categoriesBtn)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(suppliersButton)))
+                .addGap(42, 42, 42))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 275, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 289, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(addCategoryBtn)
+                    .addComponent(categoriesBtn)
                     .addComponent(removeProductBtn)
                     .addComponent(editProductBtn)
-                    .addComponent(addProductBtn))
+                    .addComponent(addProductBtn)
+                    .addComponent(suppliersButton)
+                    .addComponent(backButton))
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -135,13 +172,48 @@ public class ProductList extends javax.swing.JPanel {
         mainWindow.showPanel(new AddProduct(mainWindow));
     }//GEN-LAST:event_addProductBtnActionPerformed
 
+    private void removeProductBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeProductBtnActionPerformed
+        int[] rows = productTable.getSelectedRows();
+        boolean[] rowsToRemoveFromList = new boolean[rows.length];
+        for (int rowNum = 0; rowNum < rows.length; rowNum++) {
+            Object toRemoveId = productTable.getValueAt(rowNum, 0);
+            rowsToRemoveFromList[rowNum] = Product.remove(mainWindow.getDbManager(), toRemoveId);
+        }
+        //remove listed as true
+        for (int i = rowsToRemoveFromList.length - 1; i >= 0; i--) {
+            if (rowsToRemoveFromList[i]) {
+                ((DefaultTableModel) productTable.getModel()).removeRow(rows[i]);
+            }
+        }
+    }//GEN-LAST:event_removeProductBtnActionPerformed
+
+    private void suppliersButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_suppliersButtonActionPerformed
+        //mainWindow.showPanel(new AddSupplier(mainWindow));
+        mainWindow.showPanel(new SupplierList(mainWindow));
+    }//GEN-LAST:event_suppliersButtonActionPerformed
+
+    private void categoriesBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_categoriesBtnActionPerformed
+        //mainWindow.showPanel(new AddCategory(mainWindow));
+        mainWindow.showPanel(new CategoryList(mainWindow));
+    }//GEN-LAST:event_categoriesBtnActionPerformed
+
+    private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
+        mainWindow.showPanel(new AdminMenu(mainWindow));
+    }//GEN-LAST:event_backButtonActionPerformed
+
+    private void editProductBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editProductBtnActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_editProductBtnActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton addCategoryBtn;
     private javax.swing.JButton addProductBtn;
+    private javax.swing.JButton backButton;
+    private javax.swing.JButton categoriesBtn;
     private javax.swing.JButton editProductBtn;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable productTable;
     private javax.swing.JButton removeProductBtn;
+    private javax.swing.JButton suppliersButton;
     // End of variables declaration//GEN-END:variables
 }

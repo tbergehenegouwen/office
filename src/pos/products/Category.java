@@ -7,12 +7,20 @@
 package pos.products;
 
 import java.awt.Image;
+import java.awt.image.RenderedImage;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import pos.DbManager;
 
 /**
@@ -43,6 +51,10 @@ public class Category {
 
     public Image getImage() {
         return image;
+    }
+
+    public ImageIcon getImageIcon() {
+        return new ImageIcon(this.image.getScaledInstance(-1, 100, 0));
     }
 
     public void setImage(Image image) {
@@ -86,5 +98,38 @@ public class Category {
     @Override
     public String toString() {
         return name;
+    }
+    
+    public static void save(Category category, DbManager dbManager) {
+        try {
+            PreparedStatement stmt = dbManager.connection.prepareStatement("INSERT INTO Category"
+                    + "(Name, Image) VALUES"
+                    + "(?,?)");
+            stmt.setString(1, category.getName());
+            ByteArrayOutputStream os = new ByteArrayOutputStream();
+            ImageIO.write((RenderedImage) category.getImage(), "png", os);
+            InputStream fis = new ByteArrayInputStream(os.toByteArray());
+            stmt.setBlob(2, fis);
+            stmt.executeUpdate();
+        } catch (SQLException | IOException ex) {
+            Logger.getLogger(Product.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+     public static boolean remove(DbManager dbManager, Object id) {
+        Product product = null;
+        boolean result = false;
+        try {
+            String sql = "DELETE FROM Category WHERE id = '" + id + "'";
+            result = dbManager.removeQuery(sql);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        if (result) {
+            System.out.println("Remove gelukt!");
+        } else {
+            System.err.println("Remove niet gelukt.");
+        }
+        return result;
     }
 }
