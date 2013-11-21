@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
-<Form version="1.3" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JPanelFormInfo">
+<Form version="1.5" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JPanelFormInfo">
   <AuxValues>
     <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
     <AuxValue name="FormSettings_autoSetComponentName" type="java.lang.Boolean" value="false"/>
@@ -18,34 +18,38 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jScrollPane1" alignment="0" max="32767" attributes="0"/>
-                  <Group type="102" alignment="1" attributes="0">
-                      <EmptySpace min="0" pref="92" max="32767" attributes="0"/>
+              <Group type="103" groupAlignment="1" attributes="0">
+                  <Component id="jScrollPane1" max="32767" attributes="0"/>
+                  <Group type="102" attributes="0">
+                      <Component id="backButton" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace pref="26" max="32767" attributes="0"/>
                       <Component id="addProductBtn" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="editProductBtn" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="removeProductBtn" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="addCategoryBtn" min="-2" max="-2" attributes="0"/>
+                      <Component id="categoriesBtn" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="suppliersButton" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="42" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="-2" max="-2" attributes="0"/>
-              <Component id="jScrollPane1" pref="275" max="32767" attributes="0"/>
-              <EmptySpace min="-2" max="-2" attributes="0"/>
+              <Component id="jScrollPane1" pref="289" max="32767" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="addCategoryBtn" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="categoriesBtn" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="removeProductBtn" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="editProductBtn" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="addProductBtn" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="suppliersButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="backButton" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" max="-2" attributes="0"/>
           </Group>
@@ -63,33 +67,87 @@
         <Component class="javax.swing.JTable" name="productTable">
           <Properties>
             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-              <Table columnCount="6" rowCount="0">
+              <Table columnCount="7" rowCount="0">
                 <Column editable="false" title="Id" type="java.lang.Integer"/>
                 <Column editable="false" title="Name" type="java.lang.String"/>
                 <Column editable="false" title="Description" type="java.lang.String"/>
                 <Column editable="false" title="Price" type="java.lang.String"/>
                 <Column editable="false" title="Stock" type="java.lang.Integer"/>
                 <Column editable="false" title="Category" type="java.lang.String"/>
+                <Column editable="false" title="Image" type="java.lang.Object"/>
               </Table>
+            </Property>
+            <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
+              <TableColumnModel selectionModel="0">
+                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                  <Title/>
+                  <Editor/>
+                  <Renderer/>
+                </Column>
+                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                  <Title/>
+                  <Editor/>
+                  <Renderer/>
+                </Column>
+                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                  <Title/>
+                  <Editor/>
+                  <Renderer/>
+                </Column>
+                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                  <Title/>
+                  <Editor/>
+                  <Renderer/>
+                </Column>
+                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                  <Title/>
+                  <Editor/>
+                  <Renderer/>
+                </Column>
+                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                  <Title/>
+                  <Editor/>
+                  <Renderer/>
+                </Column>
+                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                  <Title/>
+                  <Editor/>
+                  <Renderer editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                    <Connection code="getImageRenderer()" type="code"/>
+                  </Renderer>
+                </Column>
+              </TableColumnModel>
+            </Property>
+            <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
+              <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
             </Property>
           </Properties>
         </Component>
       </SubComponents>
     </Container>
-    <Component class="javax.swing.JButton" name="addCategoryBtn">
+    <Component class="javax.swing.JButton" name="categoriesBtn">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Add Category ..."/>
+        <Property name="text" type="java.lang.String" value="Categories"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="categoriesBtnActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="removeProductBtn">
       <Properties>
         <Property name="text" type="java.lang.String" value="Remove Product ..."/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="removeProductBtnActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="editProductBtn">
       <Properties>
         <Property name="text" type="java.lang.String" value="Edit Product ..."/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="editProductBtnActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="addProductBtn">
       <Properties>
@@ -97,6 +155,22 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="addProductBtnActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="suppliersButton">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Suppliers"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="suppliersButtonActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="backButton">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Back"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="backButtonActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>
