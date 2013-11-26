@@ -21,15 +21,16 @@ import pos.products.Supplier;
 
 /**
  *
- * @author ralph
+ * @author sander
  */
 public class AddProduct extends javax.swing.JPanel {
     private final MainWindow mainWindow;
     private final Product product;
-    private File imageFile;
+    private File imageFile = null;
 
     /**
      * Creates new form AddProduct
+     * @param mainWindow
      */
     public AddProduct(MainWindow mainWindow) {
         this.mainWindow = mainWindow;
@@ -202,7 +203,9 @@ public class AddProduct extends javax.swing.JPanel {
         product.setName(nameField.getText());
         product.setDescription(descriptionField.getText());
         try {
-            product.setImage(ImageIO.read(imageFile));
+            if(imageFile != null){
+                product.setImage(ImageIO.read(imageFile));
+            }
         } catch (IOException ex) {
             Logger.getLogger(AddProduct.class.getName()).log(Level.SEVERE, null, ex);
         }

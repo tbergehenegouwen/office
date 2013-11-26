@@ -169,7 +169,7 @@ public class CategoryList extends javax.swing.JPanel {
     }//GEN-LAST:event_editCategoryBtnActionPerformed
 
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
-        mainWindow.showPanel(new AdminMenu(mainWindow));
+        mainWindow.showPanel(new ProductList(mainWindow));
     }//GEN-LAST:event_backButtonActionPerformed
 
 

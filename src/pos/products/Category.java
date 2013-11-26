@@ -22,6 +22,7 @@ import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import pos.DbManager;
+import pos.ImageRenderer;
 
 /**
  *
@@ -49,16 +50,17 @@ public class Category {
         this.name = name;
     }
 
-    public Image getImage() {
+   public Image getImage() {
+        image = (image != null)?image:ImageRenderer.getDefaultImage();
         return image;
     }
 
-    public ImageIcon getImageIcon() {
-        return new ImageIcon(this.image.getScaledInstance(-1, 100, 0));
-    }
-
     public void setImage(Image image) {
-        this.image = image;
+        this.image= image != null ? image : ImageRenderer.getDefaultImage();
+    }
+    
+    public ImageIcon getImageIcon(){
+        return new ImageIcon(this.image.getScaledInstance(-1, 100, 0));
     }
     
     public static List<Category> findAll(DbManager dbManager) {

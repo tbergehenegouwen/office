@@ -21,6 +21,7 @@ public class ProductList extends javax.swing.JPanel {
 
     /**
      * Creates new form ProductList
+     * @param mainWindow
      */
     public ProductList(MainWindow mainWindow) {
         this.mainWindow = mainWindow;
@@ -34,7 +35,7 @@ public class ProductList extends javax.swing.JPanel {
         for (Product product : products) {
             model.addRow(new Object[]{product.getId(), product.getName(), product.getDescription(),
                 java.text.NumberFormat.getCurrencyInstance(java.util.Locale.GERMANY).format(product.getPrice() / 100.0),
-                product.getStock(), product.getCategory().getName(), product.getImageIcon()});
+                product.getStock(), product.getCategory().getName(), product.getSupplier().getName(), product.getImageIcon()});
         }
     }
     
@@ -65,14 +66,14 @@ public class ProductList extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Id", "Name", "Description", "Price", "Stock", "Category", "Image"
+                "Id", "Name", "Description", "Price", "Stock", "Category", "Supplier", "Image"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.String.class, java.lang.Object.class
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false
+                false, false, false, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -85,7 +86,7 @@ public class ProductList extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(productTable);
         if (productTable.getColumnModel().getColumnCount() > 0) {
-            productTable.getColumnModel().getColumn(6).setCellRenderer(getImageRenderer());
+            productTable.getColumnModel().getColumn(7).setCellRenderer(getImageRenderer());
         }
 
         categoriesBtn.setText("Categories");
