@@ -6,6 +6,7 @@
 package pos.admin;
 
 import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import pos.ImageRenderer;
 import pos.MainWindow;
@@ -203,7 +204,15 @@ public class ProductList extends javax.swing.JPanel {
     }//GEN-LAST:event_backButtonActionPerformed
 
     private void editProductBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editProductBtnActionPerformed
-        // TODO add your handling code here:
+        int[] rows = productTable.getSelectedRows();
+        if(rows.length == 1){
+           int id = (int)productTable.getValueAt(rows[0], 0);
+           mainWindow.showPanel(new AddProduct(mainWindow, id)); 
+        }else if(rows.length < 1){
+            JOptionPane.showMessageDialog(null, "Selecteer een product om te bewerken.");
+        }else if(rows.length > 1){
+            JOptionPane.showMessageDialog(null, "Er kan maximaal 1 product tegelijk bewert worden.");
+        }
     }//GEN-LAST:event_editProductBtnActionPerformed
 
 

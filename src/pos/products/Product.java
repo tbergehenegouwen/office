@@ -5,9 +5,7 @@
  */
 package pos.products;
 
-import java.awt.Graphics2D;
 import java.awt.Image;
-import java.awt.image.BufferedImage;
 import java.awt.image.RenderedImage;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -233,7 +231,33 @@ public class Product {
             
             stmt.setInt(5, product.getStock());
             stmt.setInt(6, product.getCategory().getId());
-            stmt.setInt(7, 1);
+            stmt.setInt(7, product.getSupplier().getId());
+            stmt.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(Product.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(Product.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public static void update(Product product, DbManager dbManager) {
+        try {
+            PreparedStatement stmt = dbManager.connection.prepareStatement("UPDATE Product "
+                    + "SET Name=?, Description=?, Price=?, Image=?, Stock=?, Category_Id=?, Supplier_Id=? "
+                    + "WHERE id=?");
+            stmt.setString(1, product.getName());
+            stmt.setString(2, product.getDescription());
+            stmt.setInt(3, product.getPrice());
+            
+            ByteArrayOutputStream os = new ByteArrayOutputStream();
+            ImageIO.write((RenderedImage) product.getImage(), "png", os);
+            InputStream fis = new ByteArrayInputStream(os.toByteArray());
+            stmt.setBlob(4, fis);
+            
+            stmt.setInt(5, product.getStock());
+            stmt.setInt(6, product.getCategory().getId());
+            stmt.setInt(7, product.getSupplier().getId());
+            stmt.setInt(8,product.getId());
             stmt.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(Product.class.getName()).log(Level.SEVERE, null, ex);

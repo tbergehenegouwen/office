@@ -14,6 +14,7 @@ import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JFileChooser;
+import pos.DbManager;
 import pos.MainWindow;
 import pos.products.Category;
 import pos.products.Product;
@@ -27,7 +28,8 @@ public class AddProduct extends javax.swing.JPanel {
     private final MainWindow mainWindow;
     private final Product product;
     private File imageFile = null;
-
+    private boolean editMode = false;
+    
     /**
      * Creates new form AddProduct
      * @param mainWindow
@@ -38,6 +40,21 @@ public class AddProduct extends javax.swing.JPanel {
         initComponents();
         addCategories();
         addSuppliers();
+    }
+    
+    /**
+     * Creates new form AddProduct in edit mode using provided product id that is to be added.
+     * @param mainWindow 
+     * @param id 
+     */
+    public AddProduct(MainWindow mainWindow, int id){
+        this.editMode = true;
+        this.mainWindow = mainWindow;
+        this.product = Product.find(mainWindow.getDbManager(), id);
+        initComponents();
+        addCategories();
+        addSuppliers();
+        setValues();
     }
 
     /**
@@ -59,7 +76,7 @@ public class AddProduct extends javax.swing.JPanel {
         stockField = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         descriptionField = new javax.swing.JTextArea();
-        categories = new javax.swing.JComboBox();
+        categoryComboBox = new javax.swing.JComboBox();
         cancelBtn = new javax.swing.JButton();
         saveBtn = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
@@ -67,6 +84,7 @@ public class AddProduct extends javax.swing.JPanel {
         browseBtn = new javax.swing.JButton();
         supplierLabel = new javax.swing.JLabel();
         supplierComboBox = new javax.swing.JComboBox();
+        imageHolder = new javax.swing.JLabel();
 
         jLabel2.setText("Name");
 
@@ -82,7 +100,7 @@ public class AddProduct extends javax.swing.JPanel {
         descriptionField.setRows(5);
         jScrollPane1.setViewportView(descriptionField);
 
-        categories.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        categoryComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         cancelBtn.setText("Cancel");
         cancelBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -148,8 +166,11 @@ public class AddProduct extends javax.swing.JPanel {
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(supplierComboBox, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(categories, 0, 197, Short.MAX_VALUE))
-                                .addGap(168, 168, 168)))))
+                                    .addComponent(categoryComboBox, 0, 197, Short.MAX_VALUE))
+                                .addGap(168, 168, 168))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(imageHolder)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
 
@@ -177,7 +198,7 @@ public class AddProduct extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
-                    .addComponent(categories, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(categoryComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(supplierLabel)
@@ -187,7 +208,9 @@ public class AddProduct extends javax.swing.JPanel {
                     .addComponent(jLabel7)
                     .addComponent(imageField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(browseBtn))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 74, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(imageHolder)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 59, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cancelBtn)
                     .addComponent(saveBtn))
@@ -211,8 +234,13 @@ public class AddProduct extends javax.swing.JPanel {
         }
         product.setPrice(Integer.parseInt(priceField.getText()));
         product.setStock(Integer.parseInt(stockField.getText()));
-        product.setCategory((Category) categories.getSelectedItem());
-        Product.save(product, mainWindow.getDbManager());
+        product.setCategory((Category) categoryComboBox.getSelectedItem());
+        product.setSupplier((Supplier) supplierComboBox.getSelectedItem());
+        if(!editMode){
+            Product.save(product, mainWindow.getDbManager());
+        }else{
+            Product.update(product, mainWindow.getDbManager());
+        }
         mainWindow.showPanel(new ProductList(mainWindow));
     }//GEN-LAST:event_saveBtnActionPerformed
 
@@ -221,6 +249,12 @@ public class AddProduct extends javax.swing.JPanel {
         if(chooser.showDialog(mainWindow, "Kies een Foto!") == JFileChooser.APPROVE_OPTION) {
             imageFile = chooser.getSelectedFile();
             imageField.setText(imageFile.getName());
+            try {
+                product.setImage(ImageIO.read(imageFile));
+                imageHolder.setIcon(product.getImageIcon());
+            } catch (IOException ex) {
+                Logger.getLogger(AddProduct.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }//GEN-LAST:event_browseBtnActionPerformed
 
@@ -228,9 +262,10 @@ public class AddProduct extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton browseBtn;
     private javax.swing.JButton cancelBtn;
-    private javax.swing.JComboBox categories;
+    private javax.swing.JComboBox categoryComboBox;
     private javax.swing.JTextArea descriptionField;
     private javax.swing.JTextField imageField;
+    private javax.swing.JLabel imageHolder;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -248,11 +283,25 @@ public class AddProduct extends javax.swing.JPanel {
 
     private void addCategories() {
         List<Category> cats = Category.findAll(mainWindow.getDbManager());
-        categories.setModel(new DefaultComboBoxModel(cats.toArray()));
+        categoryComboBox.setModel(new DefaultComboBoxModel(cats.toArray()));
     }
     
     private void addSuppliers() {
         List<Supplier> sups = Supplier.findAll(mainWindow.getDbManager());
         supplierComboBox.setModel(new DefaultComboBoxModel(sups.toArray()));
+    }
+
+    /**
+     * Sets all values like they were in the original product
+     */
+    private void setValues() {
+        nameField.setText(product.getName());
+        descriptionField.setText(product.getDescription());
+        priceField.setText(product.getPrice()+"");
+        stockField.setText(product.getStock()+"");
+        //TODO zorg dat de juiste geselecteerde supplier en catsegory gepakt worden.
+        supplierComboBox.setSelectedItem((Object)product.getSupplier());
+        categoryComboBox.setSelectedItem((Object)product.getCategory());
+        imageHolder.setIcon(product.getImageIcon());
     }
 }

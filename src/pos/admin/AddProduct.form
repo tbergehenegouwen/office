@@ -53,11 +53,15 @@
                           <Group type="102" alignment="1" attributes="0">
                               <Group type="103" groupAlignment="1" attributes="0">
                                   <Component id="supplierComboBox" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="categories" pref="197" max="32767" attributes="0"/>
+                                  <Component id="categoryComboBox" pref="197" max="32767" attributes="0"/>
                               </Group>
                               <EmptySpace min="-2" pref="168" max="-2" attributes="0"/>
                           </Group>
                       </Group>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <Component id="imageHolder" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
@@ -90,7 +94,7 @@
               <EmptySpace min="-2" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jLabel6" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="categories" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="categoryComboBox" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
@@ -103,7 +107,9 @@
                   <Component id="imageField" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="browseBtn" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="74" max="32767" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="imageHolder" min="-2" max="-2" attributes="0"/>
+              <EmptySpace pref="59" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="cancelBtn" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="saveBtn" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -160,7 +166,7 @@
         </Component>
       </SubComponents>
     </Container>
-    <Component class="javax.swing.JComboBox" name="categories">
+    <Component class="javax.swing.JComboBox" name="categoryComboBox">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
           <StringArray count="4">
@@ -219,6 +225,8 @@
           </StringArray>
         </Property>
       </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="imageHolder">
     </Component>
   </SubComponents>
 </Form>
