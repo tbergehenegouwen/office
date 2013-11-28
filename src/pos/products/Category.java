@@ -70,8 +70,7 @@ public class Category {
                 Category category = new Category();
                 category.setId(result.getInt("Id"));
                 category.setName(result.getString("Name"));
-                if(result.getBinaryStream("Image") != null)
-                    category.setImage(ImageIO.read(result.getBinaryStream("Image")));
+                category.setImage(ImageIO.read(result.getBinaryStream("Image")));
                 categories.add(category);
             }
         } catch (SQLException | IOException e) {

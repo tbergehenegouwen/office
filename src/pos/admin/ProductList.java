@@ -7,6 +7,7 @@ package pos.admin;
 
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
+import pos.Home;
 import pos.ImageRenderer;
 import pos.MainWindow;
 import pos.products.Product;
@@ -198,7 +199,7 @@ public class ProductList extends javax.swing.JPanel {
     }//GEN-LAST:event_categoriesBtnActionPerformed
 
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
-        mainWindow.showPanel(new AdminMenu(mainWindow));
+        mainWindow.showPanel(new Home(mainWindow));
     }//GEN-LAST:event_backButtonActionPerformed
 
     private void editProductBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editProductBtnActionPerformed
