@@ -112,10 +112,7 @@ public class Category {
             return false;
         }
         final Category other = (Category) obj;
-        if (this.id != other.id) {
-            return false;
-        }
-        return true;
+        return this.id == other.id;
     }
     
     public static void save(Category category, DbManager dbManager) {
