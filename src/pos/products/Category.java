@@ -103,6 +103,21 @@ public class Category {
         return name;
     }
     
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Category other = (Category) obj;
+        if (this.id != other.id) {
+            return false;
+        }
+        return true;
+    }
+    
     public static void save(Category category, DbManager dbManager) {
         try {
             PreparedStatement stmt = dbManager.connection.prepareStatement("INSERT INTO Category"

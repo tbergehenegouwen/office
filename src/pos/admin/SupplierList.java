@@ -6,6 +6,7 @@
 package pos.admin;
 
 import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import pos.ImageRenderer;
 import pos.MainWindow;
@@ -161,7 +162,15 @@ public class SupplierList extends javax.swing.JPanel {
     }//GEN-LAST:event_addSupplierBtnActionPerformed
 
     private void editSupplierBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editSupplierBtnActionPerformed
-        // TODO add your handling code here:
+        int[] rows = supplierTable.getSelectedRows();
+        if(rows.length == 1){
+           int id = (int)supplierTable.getValueAt(rows[0], 0);
+           mainWindow.showPanel(new AddSupplier(mainWindow, id));
+        }else if(rows.length < 1){
+            JOptionPane.showMessageDialog(null, "Selecteer een supplier om te bewerken.");
+        }else if(rows.length > 1){
+            JOptionPane.showMessageDialog(null, "Er kan maximaal 1 supplier tegelijk bewerkt worden.");
+        }
     }//GEN-LAST:event_editSupplierBtnActionPerformed
 
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
