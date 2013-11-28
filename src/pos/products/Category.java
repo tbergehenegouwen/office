@@ -21,12 +21,13 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 import pos.DbManager;
 import pos.ImageRenderer;
 
 /**
  *
- * @author ralph
+ * @author sander
  */
 public class Category {
 
@@ -114,18 +115,37 @@ public class Category {
             stmt.setBlob(2, fis);
             stmt.executeUpdate();
         } catch (SQLException | IOException ex) {
-            Logger.getLogger(Product.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Category.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public static void update(Category category, DbManager dbManager) {
+        try {
+            PreparedStatement stmt = dbManager.connection.prepareStatement("UPDATE Category "
+                    + "SET Name=?, Image=? "
+                    + "WHERE id=?");
+            stmt.setString(1, category.getName());
+
+            ByteArrayOutputStream os = new ByteArrayOutputStream();
+            ImageIO.write((RenderedImage) category.getImage(), "png", os);
+            InputStream fis = new ByteArrayInputStream(os.toByteArray());
+            stmt.setBlob(2, fis);
+            stmt.setInt(3,category.getId());
+            stmt.executeUpdate();
+        } catch (SQLException | IOException ex) {
+            Logger.getLogger(Category.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     
      public static boolean remove(DbManager dbManager, Object id) {
-        Product product = null;
         boolean result = false;
         try {
             String sql = "DELETE FROM Category WHERE id = '" + id + "'";
             result = dbManager.removeQuery(sql);
         } catch (Exception e) {
             System.out.println(e.getMessage());
+            if(e.getMessage().contains("MySQLIntegrityConstraintViolationException"))
+                JOptionPane.showMessageDialog(null, "Er bestaan nog 1 of meerdere producten die deze categorie in gebruik hebben. Verwijder deze eerst.");
         }
         if (result) {
             System.out.println("Remove gelukt!");

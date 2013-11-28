@@ -14,7 +14,6 @@ import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JFileChooser;
-import pos.DbManager;
 import pos.MainWindow;
 import pos.products.Category;
 import pos.products.Product;
