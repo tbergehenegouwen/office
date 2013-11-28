@@ -34,6 +34,7 @@ public class AddSupplier extends javax.swing.JPanel {
         this.mainWindow = mainWindow;
         supplier = Supplier.findById(id, mainWindow.getDbManager());
         initComponents();
+        setValues();
     }
 
     /**
