@@ -23,15 +23,24 @@ public class AddCategory extends javax.swing.JPanel {
     private final MainWindow mainWindow;
     private final Category category;
     private File imageFile;
+    private boolean editMode = false;
 
     /**
-     * Creates new form AddProduct
+     * Creates new form AddCategory
      * @param mainWindow
      */
     public AddCategory(MainWindow mainWindow) {
         this.mainWindow = mainWindow;
         category = new Category();
         initComponents();
+    }
+    
+    public AddCategory(MainWindow mainWindow, int id){
+        this.editMode = true;
+        this.mainWindow = mainWindow;
+        this.category = Category.findById(id, mainWindow.getDbManager());
+        initComponents();
+        setValues();
     }
 
     /**
@@ -50,6 +59,7 @@ public class AddCategory extends javax.swing.JPanel {
         jLabel7 = new javax.swing.JLabel();
         imageField = new javax.swing.JTextField();
         browseBtn = new javax.swing.JButton();
+        imageHolder = new javax.swing.JLabel();
 
         jLabel2.setText("Name");
 
@@ -84,7 +94,8 @@ public class AddCategory extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(imageHolder)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(saveBtn)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(cancelBtn))
@@ -118,23 +129,30 @@ public class AddCategory extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cancelBtn)
-                    .addComponent(saveBtn))
+                    .addComponent(saveBtn)
+                    .addComponent(imageHolder))
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void cancelBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelBtnActionPerformed
-        mainWindow.showPanel(new ProductList(mainWindow));
+        mainWindow.showPanel(new CategoryList(mainWindow));
     }//GEN-LAST:event_cancelBtnActionPerformed
 
     private void saveBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveBtnActionPerformed
         category.setName(nameField.getText());
         try {
-            category.setImage(ImageIO.read(imageFile));
+            if(imageFile != null){
+                category.setImage(ImageIO.read(imageFile));
+            }
         } catch (IOException ex) {
             Logger.getLogger(AddCategory.class.getName()).log(Level.SEVERE, null, ex);
         }
-        Category.save(category, mainWindow.getDbManager());
+        if(!editMode){
+            Category.save(category, mainWindow.getDbManager());
+        }else{
+            Category.update(category, mainWindow.getDbManager());
+        }
         mainWindow.showPanel(new CategoryList(mainWindow));
     }//GEN-LAST:event_saveBtnActionPerformed
 
@@ -142,7 +160,13 @@ public class AddCategory extends javax.swing.JPanel {
         JFileChooser chooser = new JFileChooser();
         if(chooser.showDialog(mainWindow, "Kies een Foto!") == JFileChooser.APPROVE_OPTION) {
             imageFile = chooser.getSelectedFile();
+            try {
+                category.setImage(ImageIO.read(imageFile));
+            } catch (IOException ex) {
+                Logger.getLogger(AddCategory.class.getName()).log(Level.SEVERE, null, ex);
+            }
             imageField.setText(imageFile.getName());
+            imageHolder.setIcon(category.getImageIcon());
         }
     }//GEN-LAST:event_browseBtnActionPerformed
 
@@ -151,10 +175,15 @@ public class AddCategory extends javax.swing.JPanel {
     private javax.swing.JButton browseBtn;
     private javax.swing.JButton cancelBtn;
     private javax.swing.JTextField imageField;
+    private javax.swing.JLabel imageHolder;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JTextField nameField;
     private javax.swing.JButton saveBtn;
     // End of variables declaration//GEN-END:variables
 
+    private void setValues() {
+        nameField.setText(category.getName());
+        imageHolder.setIcon(category.getImageIcon());
+    }
 }

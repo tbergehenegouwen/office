@@ -21,6 +21,7 @@ import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import pos.DbManager;
+import pos.ImageRenderer;
 
 /**
  *
@@ -35,6 +36,8 @@ public class Product {
     private Image image;
     private int stock;
     private Category category;
+    private Supplier supplier;
+
 
     public int getId() {
         return id;
@@ -69,11 +72,12 @@ public class Product {
     }
 
     public Image getImage() {
+        image = (image != null)?image:ImageRenderer.getDefaultImage();
         return image;
     }
 
     public void setImage(Image image) {
-        this.image = image;
+        this.image= image != null ? image : ImageRenderer.getDefaultImage();
     }
     
     public ImageIcon getImageIcon(){
@@ -94,6 +98,14 @@ public class Product {
 
     public void setCategory(Category category) {
         this.category = category;
+    }
+    
+    public Supplier getSupplier() {
+        return supplier;
+    }
+
+    public void setSupplier(Supplier supplier) {
+        this.supplier = supplier;
     }
 
     @Override
@@ -129,6 +141,7 @@ public class Product {
                 product.setName(result.getString("Name"));
                 product.setCategory(category);
                 product.setDescription(result.getString("Description"));
+                product.setSupplier(Supplier.findById(result.getInt("Supplier_Id"), dbManager));
                 product.setPrice(result.getInt("Price"));
                 product.setStock(result.getInt("Stock"));
                 product.setImage(ImageIO.read(result.getBinaryStream("Image")));
@@ -150,6 +163,7 @@ public class Product {
                 product.setId(result.getInt("Id"));
                 product.setName(result.getString("Name"));
                 product.setCategory(Category.findById(result.getInt("Category_Id"), dbManager));
+                product.setSupplier(Supplier.findById(result.getInt("Supplier_Id"), dbManager));                
                 product.setDescription(result.getString("Description"));
                 product.setPrice(result.getInt("Price"));
                 product.setStock(result.getInt("Stock"));
@@ -172,6 +186,7 @@ public class Product {
                 product.setId(result.getInt("Id"));
                 product.setName(result.getString("Name"));
                 product.setCategory(Category.findById(result.getInt("Category_Id"), dbManager));
+                product.setSupplier(Supplier.findById(result.getInt("Supplier_Id"), dbManager));
                 product.setDescription(result.getString("Description"));
                 product.setPrice(result.getInt("Price"));
                 product.setStock(result.getInt("Stock"));
@@ -208,13 +223,41 @@ public class Product {
             stmt.setString(1, product.getName());
             stmt.setString(2, product.getDescription());
             stmt.setInt(3, product.getPrice());
+            
             ByteArrayOutputStream os = new ByteArrayOutputStream();
             ImageIO.write((RenderedImage) product.getImage(), "png", os);
             InputStream fis = new ByteArrayInputStream(os.toByteArray());
             stmt.setBlob(4, fis);
+            
             stmt.setInt(5, product.getStock());
             stmt.setInt(6, product.getCategory().getId());
-            stmt.setInt(7, 1);
+            stmt.setInt(7, product.getSupplier().getId());
+            stmt.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(Product.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(Product.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public static void update(Product product, DbManager dbManager) {
+        try {
+            PreparedStatement stmt = dbManager.connection.prepareStatement("UPDATE Product "
+                    + "SET Name=?, Description=?, Price=?, Image=?, Stock=?, Category_Id=?, Supplier_Id=? "
+                    + "WHERE id=?");
+            stmt.setString(1, product.getName());
+            stmt.setString(2, product.getDescription());
+            stmt.setInt(3, product.getPrice());
+            
+            ByteArrayOutputStream os = new ByteArrayOutputStream();
+            ImageIO.write((RenderedImage) product.getImage(), "png", os);
+            InputStream fis = new ByteArrayInputStream(os.toByteArray());
+            stmt.setBlob(4, fis);
+            
+            stmt.setInt(5, product.getStock());
+            stmt.setInt(6, product.getCategory().getId());
+            stmt.setInt(7, product.getSupplier().getId());
+            stmt.setInt(8,product.getId());
             stmt.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(Product.class.getName()).log(Level.SEVERE, null, ex);

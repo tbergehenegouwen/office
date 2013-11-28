@@ -6,6 +6,7 @@
 package pos.admin;
 
 import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import pos.ImageRenderer;
 import pos.MainWindow;
@@ -165,11 +166,19 @@ public class CategoryList extends javax.swing.JPanel {
     }//GEN-LAST:event_addCategoryBtnActionPerformed
 
     private void editCategoryBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editCategoryBtnActionPerformed
-        // TODO add your handling code here:
+        int[] rows = categoryTable.getSelectedRows();
+        if(rows.length == 1){
+           int id = (int)categoryTable.getValueAt(rows[0], 0);
+           mainWindow.showPanel(new AddCategory(mainWindow, id));
+        }else if(rows.length < 1){
+            JOptionPane.showMessageDialog(null, "Selecteer een categorie om te bewerken.");
+        }else if(rows.length > 1){
+            JOptionPane.showMessageDialog(null, "Er kan maximaal 1 categorie tegelijk bewerkt worden.");
+        }
     }//GEN-LAST:event_editCategoryBtnActionPerformed
 
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
-        mainWindow.showPanel(new AdminMenu(mainWindow));
+        mainWindow.showPanel(new ProductList(mainWindow));
     }//GEN-LAST:event_backButtonActionPerformed
 
 
