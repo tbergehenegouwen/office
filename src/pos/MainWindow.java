@@ -6,7 +6,8 @@
 
 package pos;
 
-import pos.admin.AdminMenu;
+import pos.admin.Login;
+import pos.admin.ProductList;
 import pos.orders.Basket;
 import pos.products.CategoryList;
 
@@ -21,6 +22,7 @@ public class MainWindow extends javax.swing.JFrame {
      */
     public MainWindow() {
         initComponents();
+        
     }
 
     /**
@@ -33,11 +35,13 @@ public class MainWindow extends javax.swing.JFrame {
     private void initComponents() {
 
         title = new javax.swing.JLabel();
-        separator = new javax.swing.JSeparator();
         panel = new javax.swing.JPanel();
+        order = new javax.swing.JLabel();
+        adminmenu = new javax.swing.JLabel();
+        orders = new javax.swing.JLabel();
+        admin = new javax.swing.JMenuBar();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(800, 600));
 
         title.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         title.setText("Office Supplies");
@@ -50,29 +54,55 @@ public class MainWindow extends javax.swing.JFrame {
 
         panel.setLayout(new java.awt.BorderLayout());
 
+        order.setText("order");
+        order.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                orderMouseClicked(evt);
+            }
+        });
+
+        adminmenu.setText("admin");
+        adminmenu.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                adminmenuMouseClicked(evt);
+            }
+        });
+
+        orders.setText("orders");
+        setJMenuBar(admin);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(panel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(separator, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(panel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap())
+                    .addGroup(layout.createSequentialGroup()
                         .addComponent(title)
-                        .addGap(0, 655, Short.MAX_VALUE)))
-                .addContainerGap())
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 388, Short.MAX_VALUE)
+                        .addComponent(order)
+                        .addGap(55, 55, 55)
+                        .addComponent(adminmenu)
+                        .addGap(44, 44, 44)
+                        .addComponent(orders)
+                        .addGap(62, 62, 62))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(title)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(separator, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(panel, javax.swing.GroupLayout.DEFAULT_SIZE, 561, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(title)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(order)
+                        .addComponent(adminmenu)
+                        .addComponent(orders)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 64, Short.MAX_VALUE)
+                .addComponent(panel, javax.swing.GroupLayout.PREFERRED_SIZE, 518, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -80,8 +110,16 @@ public class MainWindow extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void titleMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_titleMouseClicked
-        showPanel(new CategoryList(this));
+        showPanel(new Home(this));
     }//GEN-LAST:event_titleMouseClicked
+
+    private void orderMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_orderMouseClicked
+        showPanel(new CategoryList(this));
+    }//GEN-LAST:event_orderMouseClicked
+
+    private void adminmenuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_adminmenuMouseClicked
+        showPanel(new ProductList(this));
+    }//GEN-LAST:event_adminmenuMouseClicked
 
     /**
      * @param args the command line arguments
@@ -121,8 +159,11 @@ public class MainWindow extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenuBar admin;
+    private javax.swing.JLabel adminmenu;
+    private javax.swing.JLabel order;
+    private javax.swing.JLabel orders;
     private javax.swing.JPanel panel;
-    private javax.swing.JSeparator separator;
     private javax.swing.JLabel title;
     // End of variables declaration//GEN-END:variables
 
@@ -142,7 +183,7 @@ public class MainWindow extends javax.swing.JFrame {
         dbManager = new DbManager();
         dbManager.openConnection();
         // Setup the initial screen
-        showPanel(new AdminMenu(this));
+        showPanel(new Login(this));
     }
 
     public Basket getBasket() {
