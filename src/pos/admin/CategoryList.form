@@ -18,15 +18,14 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" attributes="0">
               <Component id="backButton" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="179" max="32767" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
               <Component id="editCategoryBtn" min="-2" max="-2" attributes="0"/>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
               <Component id="removeCategoryBtn" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="addCategoryBtn" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="42" max="-2" attributes="0"/>
           </Group>
-          <Component id="jScrollPane1" max="32767" attributes="0"/>
+          <Component id="jScrollPane1" pref="665" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
@@ -57,19 +56,13 @@
         <Component class="javax.swing.JTable" name="categoryTable">
           <Properties>
             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-              <Table columnCount="3" rowCount="0">
-                <Column editable="false" title="Id" type="java.lang.Integer"/>
-                <Column editable="false" title="Name" type="java.lang.String"/>
-                <Column editable="false" title="Image" type="java.lang.Object"/>
+              <Table columnCount="2" rowCount="0">
+                <Column editable="false" title="Naam" type="java.lang.String"/>
+                <Column editable="false" title="Afbeelding" type="java.lang.Object"/>
               </Table>
             </Property>
             <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
               <TableColumnModel selectionModel="0">
-                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
-                  <Title/>
-                  <Editor/>
-                  <Renderer/>
-                </Column>
                 <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
                   <Title/>
                   <Editor/>
@@ -93,7 +86,7 @@
     </Container>
     <Component class="javax.swing.JButton" name="addCategoryBtn">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Add Category ..."/>
+        <Property name="text" type="java.lang.String" value="Voeg Categorie Toe"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="addCategoryBtnActionPerformed"/>
@@ -101,7 +94,7 @@
     </Component>
     <Component class="javax.swing.JButton" name="removeCategoryBtn">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Remove Category ..."/>
+        <Property name="text" type="java.lang.String" value="Verwijder Categorie"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="removeCategoryBtnActionPerformed"/>
@@ -109,7 +102,7 @@
     </Component>
     <Component class="javax.swing.JButton" name="editCategoryBtn">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Edit Category ..."/>
+        <Property name="text" type="java.lang.String" value="Bewerk Categorie"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="editCategoryBtnActionPerformed"/>
@@ -117,7 +110,7 @@
     </Component>
     <Component class="javax.swing.JButton" name="backButton">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Back"/>
+        <Property name="text" type="java.lang.String" value="Terug"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="backButtonActionPerformed"/>

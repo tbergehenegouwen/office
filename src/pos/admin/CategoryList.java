@@ -8,7 +8,6 @@ package pos.admin;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import pos.Home;
 import pos.ImageRenderer;
 import pos.MainWindow;
 import pos.products.Category;
@@ -35,8 +34,7 @@ public class CategoryList extends javax.swing.JPanel {
         List<Category> categories = Category.findAll(mainWindow.getDbManager());
         DefaultTableModel model = (DefaultTableModel) categoryTable.getModel();
         for (Category category : categories) {
-            model.addRow(new Object[]{category.getId(), category.getName(),
-                category.getImageIcon()});
+            model.addRow(new Object[]{category.getName(), category.getImageIcon()});
         }
     }
     
@@ -65,14 +63,14 @@ public class CategoryList extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Id", "Name", "Image"
+                "Naam", "Afbeelding"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.Object.class
+                java.lang.String.class, java.lang.Object.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false
+                false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -85,31 +83,31 @@ public class CategoryList extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(categoryTable);
         if (categoryTable.getColumnModel().getColumnCount() > 0) {
-            categoryTable.getColumnModel().getColumn(2).setCellRenderer(getImageRenderer());
+            categoryTable.getColumnModel().getColumn(1).setCellRenderer(getImageRenderer());
         }
 
-        addCategoryBtn.setText("Add Category ...");
+        addCategoryBtn.setText("Voeg Categorie Toe");
         addCategoryBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 addCategoryBtnActionPerformed(evt);
             }
         });
 
-        removeCategoryBtn.setText("Remove Category ...");
+        removeCategoryBtn.setText("Verwijder Categorie");
         removeCategoryBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 removeCategoryBtnActionPerformed(evt);
             }
         });
 
-        editCategoryBtn.setText("Edit Category ...");
+        editCategoryBtn.setText("Bewerk Categorie");
         editCategoryBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 editCategoryBtnActionPerformed(evt);
             }
         });
 
-        backButton.setText("Back");
+        backButton.setText("Terug");
         backButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 backButtonActionPerformed(evt);
@@ -122,14 +120,13 @@ public class CategoryList extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(backButton)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 179, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(editCategoryBtn)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(removeCategoryBtn)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(addCategoryBtn)
-                .addGap(42, 42, 42))
-            .addComponent(jScrollPane1)
+                .addComponent(addCategoryBtn))
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 665, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -162,7 +159,6 @@ public class CategoryList extends javax.swing.JPanel {
     }//GEN-LAST:event_removeCategoryBtnActionPerformed
 
     private void addCategoryBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addCategoryBtnActionPerformed
-        //mainWindow.showPanel(new AddCategory(mainWindow));
         mainWindow.showPanel(new AddCategory(mainWindow));
     }//GEN-LAST:event_addCategoryBtnActionPerformed
 

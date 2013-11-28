@@ -68,14 +68,14 @@ public class ProductList extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Id", "Name", "Description", "Price", "Stock", "Category", "Supplier", "Image"
+                "Naam", "Omschrijving", "Prijs", "Voorraad", "Categorie", "Leverancier", "Afbeelding"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false
+                false, false, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -88,45 +88,45 @@ public class ProductList extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(productTable);
         if (productTable.getColumnModel().getColumnCount() > 0) {
-            productTable.getColumnModel().getColumn(7).setCellRenderer(getImageRenderer());
+            productTable.getColumnModel().getColumn(6).setCellRenderer(getImageRenderer());
         }
 
-        categoriesBtn.setText("Categories");
+        categoriesBtn.setText("Categoriën");
         categoriesBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 categoriesBtnActionPerformed(evt);
             }
         });
 
-        removeProductBtn.setText("Remove Product ...");
+        removeProductBtn.setText("Verwijder Product ...");
         removeProductBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 removeProductBtnActionPerformed(evt);
             }
         });
 
-        editProductBtn.setText("Edit Product ...");
+        editProductBtn.setText("Bewerk Product");
         editProductBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 editProductBtnActionPerformed(evt);
             }
         });
 
-        addProductBtn.setText("Add Product ...");
+        addProductBtn.setText("Voeg Product Toe");
         addProductBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 addProductBtnActionPerformed(evt);
             }
         });
 
-        suppliersButton.setText("Suppliers");
+        suppliersButton.setText("Leveranciers");
         suppliersButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 suppliersButtonActionPerformed(evt);
             }
         });
 
-        backButton.setText("Back");
+        backButton.setText("Terug");
         backButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 backButtonActionPerformed(evt);
@@ -138,22 +138,18 @@ public class ProductList extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jScrollPane1)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(backButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
-                        .addComponent(addProductBtn)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(editProductBtn)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(removeProductBtn)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(categoriesBtn)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(suppliersButton)))
-                .addGap(42, 42, 42))
+                .addComponent(backButton)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 113, Short.MAX_VALUE)
+                .addComponent(addProductBtn)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(editProductBtn)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(removeProductBtn)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(categoriesBtn)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(suppliersButton))
+            .addComponent(jScrollPane1)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

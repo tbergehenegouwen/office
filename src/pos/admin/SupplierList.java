@@ -63,14 +63,14 @@ public class SupplierList extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Id", "Name"
+                "Naam"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class
+                java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false
+                false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -83,28 +83,28 @@ public class SupplierList extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(supplierTable);
 
-        addSupplierBtn.setText("Add Supplier ...");
+        addSupplierBtn.setText("Voeg Leverancier Toe");
         addSupplierBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 addSupplierBtnActionPerformed(evt);
             }
         });
 
-        removeSupplierBtn.setText("Remove Supplier ...");
+        removeSupplierBtn.setText("Verwijder Leveranier");
         removeSupplierBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 removeSupplierBtnActionPerformed(evt);
             }
         });
 
-        editSupplierBtn.setText("Edit Supplier ...");
+        editSupplierBtn.setText("Bewerk Leverancier");
         editSupplierBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 editSupplierBtnActionPerformed(evt);
             }
         });
 
-        backButton.setText("Back");
+        backButton.setText("Terug");
         backButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 backButtonActionPerformed(evt);
@@ -117,14 +117,13 @@ public class SupplierList extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(backButton)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 197, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(editSupplierBtn)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(removeSupplierBtn)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(addSupplierBtn)
-                .addGap(42, 42, 42))
-            .addComponent(jScrollPane1)
+                .addComponent(addSupplierBtn))
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 665, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
