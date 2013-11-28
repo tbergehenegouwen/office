@@ -7,10 +7,8 @@ package pos.admin;
 
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
-import pos.Home;
 import pos.ImageRenderer;
 import pos.MainWindow;
-import pos.products.Product;
 import pos.products.Supplier;
 
 /**
@@ -167,11 +165,8 @@ public class SupplierList extends javax.swing.JPanel {
     }//GEN-LAST:event_editSupplierBtnActionPerformed
 
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
-<<<<<<< HEAD
-        mainWindow.showPanel(new Home(mainWindow));
-=======
+
         mainWindow.showPanel(new ProductList(mainWindow));
->>>>>>> d4fefe69f98ad681d42e4dbf487eb6aded1e0a39
     }//GEN-LAST:event_backButtonActionPerformed
 
 
