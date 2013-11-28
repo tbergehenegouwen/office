@@ -9,7 +9,6 @@ import java.util.List;
 import javax.swing.table.DefaultTableModel;
 import pos.ImageRenderer;
 import pos.MainWindow;
-import pos.products.Product;
 import pos.products.Supplier;
 
 /**
@@ -166,6 +165,7 @@ public class SupplierList extends javax.swing.JPanel {
     }//GEN-LAST:event_editSupplierBtnActionPerformed
 
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
+
         mainWindow.showPanel(new ProductList(mainWindow));
     }//GEN-LAST:event_backButtonActionPerformed
 

@@ -30,7 +30,7 @@ public class CategoryList extends javax.swing.JPanel {
         addCategories();
     }
     
-    private void addCategories() {
+    private  void addCategories() {
         List<Category> cats = Category.findAll(mainWindow.getDbManager());
         for (final Category category : cats) {
             CategoryItem categoryItem = new CategoryItem(category);
@@ -54,9 +54,22 @@ public class CategoryList extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPopupMenu1 = new javax.swing.JPopupMenu();
+        jFrame1 = new javax.swing.JFrame();
         basket = new pos.orders.BasketPanel(mainWindow);
         categoriesScrollPane = new javax.swing.JScrollPane();
         categories = new javax.swing.JPanel();
+
+        javax.swing.GroupLayout jFrame1Layout = new javax.swing.GroupLayout(jFrame1.getContentPane());
+        jFrame1.getContentPane().setLayout(jFrame1Layout);
+        jFrame1Layout.setHorizontalGroup(
+            jFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 400, Short.MAX_VALUE)
+        );
+        jFrame1Layout.setVerticalGroup(
+            jFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 300, Short.MAX_VALUE)
+        );
 
         categories.setLayout(new javax.swing.BoxLayout(categories, javax.swing.BoxLayout.Y_AXIS));
         categoriesScrollPane.setViewportView(categories);
@@ -77,11 +90,9 @@ public class CategoryList extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(categoriesScrollPane)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(basket, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 124, Short.MAX_VALUE)))
-                .addContainerGap())
+                    .addComponent(basket, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(categoriesScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 410, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -90,5 +101,7 @@ public class CategoryList extends javax.swing.JPanel {
     private pos.orders.BasketPanel basket;
     private javax.swing.JPanel categories;
     private javax.swing.JScrollPane categoriesScrollPane;
+    private javax.swing.JFrame jFrame1;
+    private javax.swing.JPopupMenu jPopupMenu1;
     // End of variables declaration//GEN-END:variables
 }
