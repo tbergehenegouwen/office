@@ -6,11 +6,7 @@
 
 package pos.products;
 
-import java.awt.image.RenderedImage;
-import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -18,12 +14,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.imageio.ImageIO;
+import javax.swing.JOptionPane;
 import pos.DbManager;
 
 /**
  *
- * @author ralph
+ * @author sander
  */
 public class Supplier {
 
@@ -94,14 +90,30 @@ public class Supplier {
         }
     }
     
+    public static void update(Supplier supplier, DbManager dbManager) {
+        try {
+            PreparedStatement stmt = dbManager.connection.prepareStatement("UPDATE Supplier "
+                    + "SET Name=?"
+                    + "WHERE id=?");
+            stmt.setString(1, supplier.getName());
+
+            ByteArrayOutputStream os = new ByteArrayOutputStream();
+            stmt.setInt(2,supplier.getId());
+            stmt.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(Supplier.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
      public static boolean remove(DbManager dbManager, Object id) {
-        Product product = null;
         boolean result = false;
         try {
-            String sql = "DELETE FROM Category WHERE id = '" + id + "'";
+            String sql = "DELETE FROM Supplier WHERE id = '" + id + "'";
             result = dbManager.removeQuery(sql);
         } catch (Exception e) {
             System.out.println(e.getMessage());
+            if(e.getMessage().contains("MySQLIntegrityConstraintViolationException"))
+                JOptionPane.showMessageDialog(null, "Er bestaan nog 1 of meerdere producten die deze supplier in gebruik hebben. Verwijder deze eerst.");
         }
         if (result) {
             System.out.println("Remove gelukt!");

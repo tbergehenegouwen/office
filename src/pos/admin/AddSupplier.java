@@ -17,14 +17,22 @@ public class AddSupplier extends javax.swing.JPanel {
 
     private final MainWindow mainWindow;
     private final Supplier supplier;
+    private boolean editMode = false;
 
     /**
-     * Creates new form AddProduct
+     * Creates new form AddSupplier
      * @param mainWindow
      */
     public AddSupplier(MainWindow mainWindow) {
         this.mainWindow = mainWindow;
         supplier = new Supplier();
+        initComponents();
+    }
+    
+    public AddSupplier(MainWindow mainWindow, int id) {
+        this.editMode = true;
+        this.mainWindow = mainWindow;
+        supplier = Supplier.findById(id, mainWindow.getDbManager());
         initComponents();
     }
 
@@ -92,13 +100,17 @@ public class AddSupplier extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void cancelBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelBtnActionPerformed
-        mainWindow.showPanel(new ProductList(mainWindow));
+        mainWindow.showPanel(new SupplierList(mainWindow));
     }//GEN-LAST:event_cancelBtnActionPerformed
 
     private void saveBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveBtnActionPerformed
         supplier.setName(nameField.getText());
-        Supplier.save(supplier, mainWindow.getDbManager());
-        mainWindow.showPanel(new ProductList(mainWindow));
+        if(!editMode){
+            Supplier.save(supplier, mainWindow.getDbManager());
+        }else{
+            Supplier.update(supplier,mainWindow.getDbManager());
+        }
+        mainWindow.showPanel(new SupplierList(mainWindow));
     }//GEN-LAST:event_saveBtnActionPerformed
 
 
@@ -109,4 +121,7 @@ public class AddSupplier extends javax.swing.JPanel {
     private javax.swing.JButton saveBtn;
     // End of variables declaration//GEN-END:variables
 
+    private void setValues() {
+        nameField.setText(supplier.getName());
+    }
 }
