@@ -211,7 +211,7 @@ public class ProductList extends javax.swing.JPanel {
         }else if(rows.length < 1){
             JOptionPane.showMessageDialog(null, "Selecteer een product om te bewerken.");
         }else if(rows.length > 1){
-            JOptionPane.showMessageDialog(null, "Er kan maximaal 1 product tegelijk bewert worden.");
+            JOptionPane.showMessageDialog(null, "Er kan maximaal 1 product tegelijk bewerkt worden.");
         }
     }//GEN-LAST:event_editProductBtnActionPerformed
 
