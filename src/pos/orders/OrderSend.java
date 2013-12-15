@@ -38,11 +38,11 @@ public class OrderSend extends javax.swing.JPanel {
         returnButton = new javax.swing.JButton();
 
         title.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        title.setText("Order Send");
+        title.setText("Bestelling geplaatst");
 
-        message.setText("Your order has been created succesfully. It will be shipped out as soon as possible.");
+        message.setText("Uw bestelling is succesvol geplaatst en zal zo spoedig mogelijk verzonden worden.");
 
-        returnButton.setText("Return to menu");
+        returnButton.setText("Terug");
         returnButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 returnButtonActionPerformed(evt);

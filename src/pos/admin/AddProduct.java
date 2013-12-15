@@ -298,7 +298,6 @@ public class AddProduct extends javax.swing.JPanel {
         descriptionField.setText(product.getDescription());
         priceField.setText(product.getPrice()+"");
         stockField.setText(product.getStock()+"");
-        //TODO zorg dat de juiste geselecteerde supplier en catsegory gepakt worden.
         supplierComboBox.setSelectedItem((Object)product.getSupplier());
         categoryComboBox.setSelectedItem((Object)product.getCategory());
         imageHolder.setIcon(product.getImageIcon());

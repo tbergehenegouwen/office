@@ -68,14 +68,14 @@ public class ProductList extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Naam", "Omschrijving", "Prijs", "Voorraad", "Categorie", "Leverancier", "Afbeelding"
+                "id", "Naam", "Omschrijving", "Prijs", "Voorraad", "Categorie", "Leverancier", "Afbeelding"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false
+                false, false, false, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -88,7 +88,10 @@ public class ProductList extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(productTable);
         if (productTable.getColumnModel().getColumnCount() > 0) {
-            productTable.getColumnModel().getColumn(6).setCellRenderer(getImageRenderer());
+            productTable.getColumnModel().getColumn(0).setMinWidth(0);
+            productTable.getColumnModel().getColumn(0).setPreferredWidth(0);
+            productTable.getColumnModel().getColumn(0).setMaxWidth(0);
+            productTable.getColumnModel().getColumn(7).setCellRenderer(getImageRenderer());
         }
 
         categoriesBtn.setText("Categoriën");

@@ -59,15 +59,15 @@ public class BasketPanel extends javax.swing.JPanel implements java.util.Observe
         placeOrderButton = new javax.swing.JButton();
 
         title.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        title.setText("Basket");
+        title.setText("Winkelmandje");
 
         orderlines.setLayout(new javax.swing.BoxLayout(orderlines, javax.swing.BoxLayout.Y_AXIS));
 
-        labelTotal.setText("Total:");
+        labelTotal.setText("Totaal:");
 
-        price.setText("Price");
+        price.setText("Prijs");
 
-        placeOrderButton.setText("Place Order");
+        placeOrderButton.setText("Plaats bestelling");
         placeOrderButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 placeOrderButtonActionPerformed(evt);

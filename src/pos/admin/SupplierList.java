@@ -63,14 +63,14 @@ public class SupplierList extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Naam"
+                "id", "Naam"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class
+                java.lang.Integer.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false
+                false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -82,6 +82,11 @@ public class SupplierList extends javax.swing.JPanel {
             }
         });
         jScrollPane1.setViewportView(supplierTable);
+        if (supplierTable.getColumnModel().getColumnCount() > 0) {
+            supplierTable.getColumnModel().getColumn(0).setMinWidth(0);
+            supplierTable.getColumnModel().getColumn(0).setPreferredWidth(0);
+            supplierTable.getColumnModel().getColumn(0).setMaxWidth(0);
+        }
 
         addSupplierBtn.setText("Voeg Leverancier Toe");
         addSupplierBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -144,7 +149,7 @@ public class SupplierList extends javax.swing.JPanel {
         int[] rows = supplierTable.getSelectedRows();
         boolean[] rowsToRemoveFromList = new boolean[rows.length];
         for (int rowNum = 0; rowNum < rows.length; rowNum++) {
-            Object toRemoveId = supplierTable.getValueAt(rowNum, 0);
+            Object toRemoveId = supplierTable.getValueAt(rows[rowNum], 0);
             rowsToRemoveFromList[rowNum] = Supplier.remove(mainWindow.getDbManager(), toRemoveId);
         }
         //remove listed as true

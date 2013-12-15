@@ -25,10 +25,15 @@ public class ImageRenderer extends DefaultTableCellRenderer {
      @Override
      public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
          JLabel image = new JLabel("");
-         ImageIcon imageIcon = (ImageIcon)value;
-         image.setIcon(imageIcon);
-         image.setSize(imageIcon.getIconWidth(), imageIcon.getIconHeight());
-         table.setRowHeight(row,imageIcon.getIconHeight());
+         if(value.getClass() == ImageIcon.class){
+            ImageIcon imageIcon = (ImageIcon)value;
+            image.setIcon(imageIcon);
+            image.setSize(imageIcon.getIconWidth(), imageIcon.getIconHeight());
+            table.setRowHeight(row,imageIcon.getIconHeight());
+         }else{
+             System.err.println("No ImageIcon found");
+             System.out.println(value.getClass());
+         }
          return image;
      }
      
