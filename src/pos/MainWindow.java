@@ -6,8 +6,11 @@
 
 package pos;
 
+import com.sun.org.apache.xalan.internal.xsltc.compiler.util.TestGenerator;
+import javax.swing.JOptionPane;
 import pos.admin.Login;
 import pos.admin.ProductList;
+import pos.admin.User;
 import pos.orders.Basket;
 import pos.products.CategoryList;
 
@@ -166,12 +169,17 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JPanel panel;
     private javax.swing.JLabel title;
     // End of variables declaration//GEN-END:variables
-
+    
+    private User testgebruiker = new User();
     public void showPanel(javax.swing.JPanel newPanel) {
         panel.removeAll();
         panel.add(newPanel, java.awt.BorderLayout.CENTER);
         panel.validate();
         panel.repaint();
+            
+       }
+    public User getUser(){
+        return testgebruiker;
     }
 
     private Basket basket;
@@ -193,4 +201,6 @@ public class MainWindow extends javax.swing.JFrame {
     public DbManager getDbManager() {
         return dbManager;
     }
+    
+    
 }
