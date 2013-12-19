@@ -174,6 +174,7 @@ public class MainWindow extends javax.swing.JFrame {
         panel.repaint();
         this.order.setVisible(true);
         this.adminmenu.setVisible(true);
+        
     }
 
     private Basket basket;

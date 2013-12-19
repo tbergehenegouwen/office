@@ -14,7 +14,7 @@ public class DbManager {
         try {
             Class.forName("com.mysql.jdbc.Driver");
             String url = "jdbc:mysql://localhost/pos";
-            String user = "root", pass = "root";
+            String user = "root", pass = "password";
 
             connection = DriverManager.getConnection(url, user, pass);
         } catch (ClassNotFoundException | SQLException e) {
