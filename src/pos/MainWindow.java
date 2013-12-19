@@ -172,6 +172,8 @@ public class MainWindow extends javax.swing.JFrame {
         panel.add(newPanel, java.awt.BorderLayout.CENTER);
         panel.validate();
         panel.repaint();
+        this.order.setVisible(true);
+        this.adminmenu.setVisible(true);
     }
 
     private Basket basket;
@@ -183,7 +185,11 @@ public class MainWindow extends javax.swing.JFrame {
         dbManager = new DbManager();
         dbManager.openConnection();
         // Setup the initial screen
+        
         showPanel(new Login(this));
+//        this.remove(adminmenu);
+        this.order.setVisible(false);
+        this.adminmenu.setVisible(false);
     }
 
     public Basket getBasket() {
