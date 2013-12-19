@@ -51,16 +51,16 @@ public class AddSupplier extends javax.swing.JPanel {
         cancelBtn = new javax.swing.JButton();
         saveBtn = new javax.swing.JButton();
 
-        nameLabel.setText("Name");
+        nameLabel.setText("Naam");
 
-        cancelBtn.setText("Cancel");
+        cancelBtn.setText("Annuleren");
         cancelBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cancelBtnActionPerformed(evt);
             }
         });
 
-        saveBtn.setText("Save");
+        saveBtn.setText("Opslaan");
         saveBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 saveBtnActionPerformed(evt);
@@ -75,7 +75,7 @@ public class AddSupplier extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 349, Short.MAX_VALUE)
+                        .addGap(0, 302, Short.MAX_VALUE)
                         .addComponent(saveBtn)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(cancelBtn))

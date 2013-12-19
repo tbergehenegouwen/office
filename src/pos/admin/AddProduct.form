@@ -53,7 +53,7 @@
                           <Group type="102" alignment="1" attributes="0">
                               <Group type="103" groupAlignment="1" attributes="0">
                                   <Component id="supplierComboBox" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="categoryComboBox" pref="197" max="32767" attributes="0"/>
+                                  <Component id="categoryComboBox" pref="190" max="32767" attributes="0"/>
                               </Group>
                               <EmptySpace min="-2" pref="168" max="-2" attributes="0"/>
                           </Group>
@@ -122,27 +122,27 @@
   <SubComponents>
     <Component class="javax.swing.JLabel" name="jLabel2">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Name"/>
+        <Property name="text" type="java.lang.String" value="Naam"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel3">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Description"/>
+        <Property name="text" type="java.lang.String" value="Omschrijving"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel4">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Price"/>
+        <Property name="text" type="java.lang.String" value="Prijs"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel5">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Stock"/>
+        <Property name="text" type="java.lang.String" value="Voorraad"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel6">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Category"/>
+        <Property name="text" type="java.lang.String" value="Categorie"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="nameField">
@@ -180,7 +180,7 @@
     </Component>
     <Component class="javax.swing.JButton" name="cancelBtn">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Cancel"/>
+        <Property name="text" type="java.lang.String" value="Annuleren"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cancelBtnActionPerformed"/>
@@ -188,7 +188,7 @@
     </Component>
     <Component class="javax.swing.JButton" name="saveBtn">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Save"/>
+        <Property name="text" type="java.lang.String" value="Opslaan"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="saveBtnActionPerformed"/>
@@ -196,14 +196,14 @@
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel7">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Image"/>
+        <Property name="text" type="java.lang.String" value="Afbeelding"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="imageField">
     </Component>
     <Component class="javax.swing.JButton" name="browseBtn">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Browse ..."/>
+        <Property name="text" type="java.lang.String" value="Bladeren"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="browseBtnActionPerformed"/>
@@ -211,7 +211,7 @@
     </Component>
     <Component class="javax.swing.JLabel" name="supplierLabel">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Supplier"/>
+        <Property name="text" type="java.lang.String" value="Leverancier"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JComboBox" name="supplierComboBox">

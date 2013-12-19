@@ -61,25 +61,25 @@ public class AddCategory extends javax.swing.JPanel {
         browseBtn = new javax.swing.JButton();
         imageHolder = new javax.swing.JLabel();
 
-        jLabel2.setText("Name");
+        jLabel2.setText("Naam");
 
-        cancelBtn.setText("Cancel");
+        cancelBtn.setText("Annuleren");
         cancelBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cancelBtnActionPerformed(evt);
             }
         });
 
-        saveBtn.setText("Save");
+        saveBtn.setText("Opslaan");
         saveBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 saveBtnActionPerformed(evt);
             }
         });
 
-        jLabel7.setText("Image");
+        jLabel7.setText("Afbeelding");
 
-        browseBtn.setText("Browse ...");
+        browseBtn.setText("Bladeren");
         browseBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 browseBtnActionPerformed(evt);
@@ -106,7 +106,7 @@ public class AddCategory extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel7)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(imageField, javax.swing.GroupLayout.DEFAULT_SIZE, 316, Short.MAX_VALUE)
+                        .addComponent(imageField, javax.swing.GroupLayout.DEFAULT_SIZE, 295, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(browseBtn)))
                 .addContainerGap())

@@ -63,7 +63,7 @@ public class SupplierList extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Id", "Name"
+                "id", "Naam"
             }
         ) {
             Class[] types = new Class [] {
@@ -82,29 +82,34 @@ public class SupplierList extends javax.swing.JPanel {
             }
         });
         jScrollPane1.setViewportView(supplierTable);
+        if (supplierTable.getColumnModel().getColumnCount() > 0) {
+            supplierTable.getColumnModel().getColumn(0).setMinWidth(0);
+            supplierTable.getColumnModel().getColumn(0).setPreferredWidth(0);
+            supplierTable.getColumnModel().getColumn(0).setMaxWidth(0);
+        }
 
-        addSupplierBtn.setText("Add Supplier ...");
+        addSupplierBtn.setText("Voeg Leverancier Toe");
         addSupplierBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 addSupplierBtnActionPerformed(evt);
             }
         });
 
-        removeSupplierBtn.setText("Remove Supplier ...");
+        removeSupplierBtn.setText("Verwijder Leveranier");
         removeSupplierBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 removeSupplierBtnActionPerformed(evt);
             }
         });
 
-        editSupplierBtn.setText("Edit Supplier ...");
+        editSupplierBtn.setText("Bewerk Leverancier");
         editSupplierBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 editSupplierBtnActionPerformed(evt);
             }
         });
 
-        backButton.setText("Back");
+        backButton.setText("Terug");
         backButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 backButtonActionPerformed(evt);
@@ -117,14 +122,13 @@ public class SupplierList extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(backButton)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 197, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(editSupplierBtn)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(removeSupplierBtn)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(addSupplierBtn)
-                .addGap(42, 42, 42))
-            .addComponent(jScrollPane1)
+                .addComponent(addSupplierBtn))
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 665, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -145,7 +149,7 @@ public class SupplierList extends javax.swing.JPanel {
         int[] rows = supplierTable.getSelectedRows();
         boolean[] rowsToRemoveFromList = new boolean[rows.length];
         for (int rowNum = 0; rowNum < rows.length; rowNum++) {
-            Object toRemoveId = supplierTable.getValueAt(rowNum, 0);
+            Object toRemoveId = supplierTable.getValueAt(rows[rowNum], 0);
             rowsToRemoveFromList[rowNum] = Supplier.remove(mainWindow.getDbManager(), toRemoveId);
         }
         //remove listed as true

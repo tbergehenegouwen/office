@@ -5,8 +5,7 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 public class DbManager {
     public Connection connection;
@@ -15,7 +14,7 @@ public class DbManager {
         try {
             Class.forName("com.mysql.jdbc.Driver");
             String url = "jdbc:mysql://localhost/pos";
-            String user = "root", pass = "password";
+            String user = "root", pass = "root";
 
             connection = DriverManager.getConnection(url, user, pass);
         } catch (ClassNotFoundException | SQLException e) {
@@ -39,6 +38,8 @@ public class DbManager {
             result = true;
         } catch (SQLException e) {
             System.err.println(e);
+            JOptionPane.showMessageDialog(null,"Kan de Category of Leverancier niet verwijderen omdat ze een verbinding met een product hebben. \n"+
+                    "Verwijder eerst alle producten die verbonden zijn met de Category of Leverancier", "Verwijder Error",JOptionPane.ERROR_MESSAGE);
         }
         return result;
     }

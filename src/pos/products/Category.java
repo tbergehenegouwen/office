@@ -153,6 +153,7 @@ public class Category {
         boolean result = false;
         try {
             String sql = "DELETE FROM Category WHERE id = '" + id + "'";
+            System.out.println(id);
             result = dbManager.removeQuery(sql);
         } catch (Exception e) {
             System.out.println(e.getMessage());

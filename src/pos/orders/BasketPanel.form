@@ -60,7 +60,7 @@
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Tahoma" size="12" style="1"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Basket"/>
+        <Property name="text" type="java.lang.String" value="Winkelmandje"/>
       </Properties>
     </Component>
     <Container class="javax.swing.JPanel" name="orderlines">
@@ -71,17 +71,17 @@
     </Container>
     <Component class="javax.swing.JLabel" name="labelTotal">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Total:"/>
+        <Property name="text" type="java.lang.String" value="Totaal:"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="price">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Price"/>
+        <Property name="text" type="java.lang.String" value="Prijs"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="placeOrderButton">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Place Order"/>
+        <Property name="text" type="java.lang.String" value="Plaats bestelling"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="placeOrderButtonActionPerformed"/>
