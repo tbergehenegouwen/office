@@ -28,16 +28,14 @@ public class User {
     
     public boolean Login(String username, String password){
         
-//        DbManager dbManager = new DbManager();
-//        String sql = "SELECT * FROM User WHERE name='admin' AND password ='admin'";
-//        ResultSet result = dbManager.doQuery(sql);
         DbManager db = new DbManager();
         db.openConnection();
         String sql = "SELECT User.Id, User.Name as Name,Role.Name as Role,Office.Name as Office, Address,City,Phone FROM User";
         sql+= " JOIN Role ON Role.Id=Role_id";
         sql+= " JOIN Office ON Office.Id=Office_id";
         sql+= " WHERE User.name='"+username+"' AND password='"+password+"'";
-       
+        System.out.println(sql);       
+        
         ResultSet result = db.doQuery(sql);
         try {
             while(result.next()){

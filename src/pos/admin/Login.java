@@ -17,6 +17,7 @@ public class Login extends javax.swing.JPanel {
     private final MainWindow mainWindow;
     /**
      * Creates new form Login
+     * @param mainWindow
      */
     public Login(MainWindow mainWindow) {
         initComponents();
