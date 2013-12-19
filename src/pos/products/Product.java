@@ -133,7 +133,7 @@ public class Product {
     public static List<Product> findByCategory(Category category, DbManager dbManager) {
         List<Product> products = new ArrayList<>();
         try {
-            String sql = "SELECT * FROM Product WHERE " + category.getId() + " ORDER BY Name ASC";
+            String sql = "SELECT * FROM Product WHERE Category_id=" + category.getId() + " ORDER BY Name ASC";
             ResultSet result = dbManager.doQuery(sql);
             while (result.next()) {
                 Product product = new Product();
@@ -199,7 +199,6 @@ public class Product {
     }
 
     public static boolean remove(DbManager dbManager, Object id) {
-        Product product = null;
         boolean result = false;
         try {
             String sql = "DELETE FROM Product WHERE id = '" + id + "'";

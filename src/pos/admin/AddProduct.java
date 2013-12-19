@@ -85,15 +85,15 @@ public class AddProduct extends javax.swing.JPanel {
         supplierComboBox = new javax.swing.JComboBox();
         imageHolder = new javax.swing.JLabel();
 
-        jLabel2.setText("Name");
+        jLabel2.setText("Naam");
 
-        jLabel3.setText("Description");
+        jLabel3.setText("Omschrijving");
 
-        jLabel4.setText("Price");
+        jLabel4.setText("Prijs");
 
-        jLabel5.setText("Stock");
+        jLabel5.setText("Voorraad");
 
-        jLabel6.setText("Category");
+        jLabel6.setText("Categorie");
 
         descriptionField.setColumns(20);
         descriptionField.setRows(5);
@@ -101,30 +101,30 @@ public class AddProduct extends javax.swing.JPanel {
 
         categoryComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
-        cancelBtn.setText("Cancel");
+        cancelBtn.setText("Annuleren");
         cancelBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cancelBtnActionPerformed(evt);
             }
         });
 
-        saveBtn.setText("Save");
+        saveBtn.setText("Opslaan");
         saveBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 saveBtnActionPerformed(evt);
             }
         });
 
-        jLabel7.setText("Image");
+        jLabel7.setText("Afbeelding");
 
-        browseBtn.setText("Browse ...");
+        browseBtn.setText("Bladeren");
         browseBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 browseBtnActionPerformed(evt);
             }
         });
 
-        supplierLabel.setText("Supplier");
+        supplierLabel.setText("Leverancier");
 
         supplierComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
@@ -165,7 +165,7 @@ public class AddProduct extends javax.swing.JPanel {
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(supplierComboBox, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(categoryComboBox, 0, 197, Short.MAX_VALUE))
+                                    .addComponent(categoryComboBox, 0, 190, Short.MAX_VALUE))
                                 .addGap(168, 168, 168))))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(imageHolder)
@@ -298,7 +298,6 @@ public class AddProduct extends javax.swing.JPanel {
         descriptionField.setText(product.getDescription());
         priceField.setText(product.getPrice()+"");
         stockField.setText(product.getStock()+"");
-        //TODO zorg dat de juiste geselecteerde supplier en catsegory gepakt worden.
         supplierComboBox.setSelectedItem((Object)product.getSupplier());
         categoryComboBox.setSelectedItem((Object)product.getCategory());
         imageHolder.setIcon(product.getImageIcon());

@@ -55,10 +55,8 @@ public class OrderDetails extends javax.swing.JPanel {
     private void initComponents() {
 
         dateLabel = new javax.swing.JLabel();
-        locationLabel = new javax.swing.JLabel();
         nameLabel = new javax.swing.JLabel();
         date = new javax.swing.JLabel();
-        location = new javax.swing.JLabel();
         name = new javax.swing.JLabel();
         scrollpane = new javax.swing.JScrollPane();
         orderTable = new javax.swing.JTable();
@@ -66,15 +64,11 @@ public class OrderDetails extends javax.swing.JPanel {
         priceLabel = new javax.swing.JLabel();
         orderButton = new javax.swing.JButton();
 
-        dateLabel.setText("Date:");
+        dateLabel.setText("Datum:");
 
-        locationLabel.setText("Location:");
-
-        nameLabel.setText("Name:");
+        nameLabel.setText("Naam klant:");
 
         date.setText(java.text.DateFormat.getDateInstance(java.text.DateFormat.MEDIUM, java.util.Locale.GERMAN).format(orderDate));
-
-        location.setText("jLabel5");
 
         name.setText("jLabel6");
 
@@ -83,7 +77,7 @@ public class OrderDetails extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Amount", "Product", "Price", "Subtotal"
+                "Aantal", "Product naam", "Prijs", "Subtotaal"
             }
         ) {
             Class[] types = new Class [] {
@@ -98,9 +92,9 @@ public class OrderDetails extends javax.swing.JPanel {
 
         price.setText(java.text.NumberFormat.getCurrencyInstance(java.util.Locale.GERMANY).format(mainWindow.getBasket().getTotalCosts() / 100.0));
 
-        priceLabel.setText("Total:");
+        priceLabel.setText("Totaal:");
 
-        orderButton.setText("Order ...");
+        orderButton.setText("Bevestig bestelling");
         orderButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 orderButtonActionPerformed(evt);
@@ -115,21 +109,6 @@ public class OrderDetails extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(scrollpane, javax.swing.GroupLayout.DEFAULT_SIZE, 509, Short.MAX_VALUE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(dateLabel)
-                                .addGap(18, 18, 18)
-                                .addComponent(date))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(locationLabel)
-                                .addGap(18, 18, 18)
-                                .addComponent(location))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(nameLabel)
-                                .addGap(18, 18, 18)
-                                .addComponent(name)))
-                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -137,11 +116,22 @@ public class OrderDetails extends javax.swing.JPanel {
                                 .addComponent(priceLabel)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(price))
-                            .addComponent(orderButton, javax.swing.GroupLayout.Alignment.TRAILING))))
+                            .addComponent(orderButton, javax.swing.GroupLayout.Alignment.TRAILING)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(dateLabel)
+                                .addGap(18, 18, 18)
+                                .addComponent(date))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(nameLabel)
+                                .addGap(18, 18, 18)
+                                .addComponent(name)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
 
-        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {dateLabel, locationLabel, nameLabel});
+        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {dateLabel, nameLabel});
 
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -152,13 +142,9 @@ public class OrderDetails extends javax.swing.JPanel {
                     .addComponent(date))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(locationLabel)
-                    .addComponent(location))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(nameLabel)
                     .addComponent(name))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(28, 28, 28)
                 .addComponent(scrollpane, javax.swing.GroupLayout.DEFAULT_SIZE, 275, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -179,8 +165,6 @@ public class OrderDetails extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel date;
     private javax.swing.JLabel dateLabel;
-    private javax.swing.JLabel location;
-    private javax.swing.JLabel locationLabel;
     private javax.swing.JLabel name;
     private javax.swing.JLabel nameLabel;
     private javax.swing.JButton orderButton;
